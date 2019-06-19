@@ -20,5 +20,7 @@ services:
   devp2p:
     build:
       context: .
-    environment:
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
       
