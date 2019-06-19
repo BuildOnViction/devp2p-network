@@ -16,3 +16,9 @@ services:
     restart: always
     ports:
       - 3000:3000
+
+  devp2p:
+    build:
+      context: .
+    environment:
+      

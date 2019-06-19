@@ -7,14 +7,14 @@ const geoip = require('geoip-lite')
 const debug = require('debug')('infura:main')
 const Web3 = require('web3')
 // https://github.com/ethereum/web3.js/issues/2786
-const web3 = new Web3('http://')
+const web3 = new Web3('https://rpc.tomochain.com')
 const _ = require('lodash')
 const db = require('./lib/db')()
 const Common = require('ethereumjs-common')
 const c = new Common('mainnet')
-const web3Url = process.env.PROVIDER || `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`
-const ethProvider = new Web3.providers.HttpProvider(web3Url)
-web3.setProvider(ethProvider)
+//const web3Url = process.env.PROVIDER || `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`
+const tomoProvider = new Web3.providers.HttpProvider('https://rpc.tomochain.com')
+web3.setProvider(tomoProvider)
 
 const { EthPeer, PeerErr } = db
 
@@ -27,9 +27,9 @@ const BOOTNODES = c.bootstrapNodes().map((node) => {
   }
 })
 
-const CHAIN_ID = 1
+const CHAIN_ID = 88
 const GENESIS_TD = 17179869184
-const GENESIS_HASH = Buffer.from('d4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3', 'hex')
+const GENESIS_HASH = Buffer.from('9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624', 'hex')
 
 const myStatus = {
   networkId: CHAIN_ID,
@@ -50,7 +50,7 @@ const dpt = new devp2p.DPT(Buffer.from(PRIVATE_KEY, 'hex'), {
 // RLPx
 const rlpx = new devp2p.RLPx(PRIVATE_KEY, {
   dpt: dpt,
-  clientId: `ethereumjs-devp2p/v2.5.1-research/${os.platform()}-${os.arch()}/nodejs`,
+  clientId: `tomo/v1.4.1-stable/${os.platform()}-${os.arch()}/go1.10.8`,
   maxPeers: 25,
   capabilities: [
     devp2p.ETH.eth63,
