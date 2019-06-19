@@ -11,7 +11,27 @@ const web3 = new Web3('https://rpc.tomochain.com')
 const _ = require('lodash')
 const db = require('./lib/db')()
 const Common = require('ethereumjs-common')
-const c = new Common('mainnet')
+
+const options = {
+    name: 'TomoChain',
+    chainId: 88,
+    networkId: 88,
+    comment: 'TomoChain - The most efficient Blockchain for the Token Economy',
+    hardforks: [],
+    genesis: {
+        hash: '9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624'
+    },
+    bootstrapNodes: [{
+        id: '97f0ca95a653e3c44d5df2674e19e9324ea4bf4d47a46b1d8560f3ed4ea328f725acec3fcfcb37eb11706cf07da669e9688b091f1543f89b2425700a68bc8876',
+        ip: '104.248.98.78',
+        port: 30301
+    }, {
+        id: 'b72927f349f3a27b789d0ca615ffe3526f361665b496c80e7cc19dace78bd94785fdadc270054ab727dbb172d9e3113694600dd31b2558dd77ad85a869032dea',
+        ip: '188.166.207.189',
+        port: 30301
+    }]
+}
+const c = new Common(options)
 //const web3Url = process.env.PROVIDER || `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`
 const tomoProvider = new Web3.providers.HttpProvider('https://rpc.tomochain.com')
 web3.setProvider(tomoProvider)
